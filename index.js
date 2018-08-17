@@ -1,13 +1,21 @@
-require('dotenv').config();
+"use strict";
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const prefix = process.env.BOT_PREFIX;
-const token = process.env.BOT_TOKEN;
+const config = require('./Helpers/Config/loader.js')
+
+const commandLoader = require('./Helpers/Commands/loader.js');
+
+var globals = {
+    client: client,
+    config: config,
+    commandLoader: commandLoader
+}
 
 client.on('ready', () => {
     console.log('I am ready!');
+    client.user.setActivity(config.activity);
 });
 
 client.on('message', async message => {
@@ -15,21 +23,13 @@ client.on('message', async message => {
     if (message.author.bot) return;
 
     //ignore any message that doesnt start with the prefix
-    if (message.content.indexOf(prefix) !== 0) return;
+    if (message.content.indexOf(config.prefix) !== 0) return;
 
-    const argv = message.content.slice(prefix.length).trim().split(/ +/g);
-    const command = argv.shift().toLowerCase();
-    const argc = argv.length;
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
 
-console.log(command);
-    if (command === 'ping') {
-        const m = await message.channel.send('Ping?');
-        const latency = m.createdTimestamp - message.createdTimestamp;
-        const apiLatency = Math.round(client.ping);
-        m.edit(`Pong! Latency is ${latency}ms. API Latency is ${apiLatency}ms.`)
-        return;
-    }
-
+    console.log((config.prefix + command + ' ' + args.join(' ')).trim() + ' [' + message.author.tag + ']');
+    commandLoader.get(command).handle(globals, message, args);
 });
 
-client.login(token);
+client.login(config.token);
