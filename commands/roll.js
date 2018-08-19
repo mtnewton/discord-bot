@@ -23,7 +23,7 @@ class Roll {
 
     info() {
         return [
-            ["!roll", "!roll max", "!roll min max"]
+            ["!roll", "!roll *max*", "!roll *min* *max*"]
         ];
     }
 

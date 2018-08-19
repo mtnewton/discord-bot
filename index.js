@@ -10,7 +10,8 @@ const commandLoader = require('./Helpers/Commands/loader.js');
 var globals = {
     client: client,
     config: config,
-    commandLoader: commandLoader
+    commandLoader: commandLoader,
+    voiceConnections: {}
 }
 
 client.on('ready', () => {
