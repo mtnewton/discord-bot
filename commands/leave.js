@@ -1,9 +1,9 @@
 "use strict";
 
 class Leave {
-    async handle(globals, message, args) {
-        if (message.guild && globals.voiceConnections[message.guild.id]) {
-            globals.voiceConnections[message.guild.id].disconnect();
+    async handle(bot, message, args) {
+        if (message.guild && bot.voiceConnections[message.guild.id]) {
+            bot.voiceConnections[message.guild.id].disconnect();
         }
     }
 

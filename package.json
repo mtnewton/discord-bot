@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "Marvin Newton <discord-bot@mtnewton.net>",
   "repository": "github:mtnewton/discord-bot",
@@ -8,14 +8,15 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "prestart": "yarn add ffmpeg-binaries node-opus &&yarn",
+    "prestart": "yarn",
     "start": "nodemon -L",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "discord.js": "^11.4.0",
     "ffmpeg-binaries": "^4.0.0",
-    "node-opus": "^0.3.0"
+    "node-opus": "^0.3.0",
+    "ytdl-core": "^0.24.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"

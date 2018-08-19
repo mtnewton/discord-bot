@@ -1,18 +1,18 @@
 "use strict";
 
 class Join {
-    async handle(globals, message, args) {
+    async handle(bot, message, args) {
         if (message.guild) {
             var channels = message.guild.channels.filter(c => c.type === 'voice');
             var channel;
             if (args.length) {
                 channel = channels.find(c => c.name.toLowerCase() === args[0].toLowerCase());
-            } else {
-                channel = channels.find(c => c.name.toLowerCase() === "general");
+            } else if (message.member) {
+                channel = message.member.voiceChannel;
             }
             if (channel) {
                 channel.join().then(connection => {
-                    globals.voiceConnections[message.guild.id] = connection;
+                    bot.voiceConnections[message.guild.id] = connection;
                 });
             }
         }

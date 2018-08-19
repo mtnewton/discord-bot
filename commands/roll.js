@@ -1,21 +1,21 @@
 "use strict";
 
 class Roll {
-    async handle(globals, message, args) {
+    async handle(bot, message, args) {
         var min, max;
         if (args.length == 1) {
             min = 1;
-            max = parseInt(args[0])
+            max = parseInt(args[0]);
         } else if (args.length == 2) {
-            min = parseInt(args[0])
-            max = parseInt(args[1])
+            min = parseInt(args[0]);
+            max = parseInt(args[1]);
         } else {
             min = 1;
             max = 100;
         }
 
         if (isNaN(min) || isNaN(max) || min >max) {
-            return
+            return;
         }
 
         this._say(message, this._roll(min, max));

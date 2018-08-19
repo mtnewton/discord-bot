@@ -1,10 +1,10 @@
 "use strict";
 
 class Command {
-    async handle(globals, message, args) {
+    async handle(bot, message, args) {
         var info = [];
-        Object.keys(globals.commandLoader.commands).forEach(command => {
-            var calls = globals.commandLoader.get(command).info();
+        Object.keys(bot.commandLoader.commands).forEach(command => {
+            var calls = bot.commandLoader.get(command).info();
             var result = "";
             calls.forEach(call => {
                 result += '**' + call.shift() + '**';
